@@ -1,4 +1,4 @@
 #!/bin/bash
 
-emcc wgyn.cpp -o wgyn.js -s EXPORTED_FUNCTIONS="['_solve_wgyn']" -O3
+emcc wgyn.cpp -o wgyn.js -s EXPORTED_FUNCTIONS="['_solve_wgyn']" -s EXPORTED_RUNTIME_METHODS=["ccall"] -O3
 
