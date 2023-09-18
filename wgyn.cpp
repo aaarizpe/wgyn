@@ -65,6 +65,7 @@ void evaluate(int sequence[], int fact_array[]);
 int      numbers[4];
 solution results[101];
 int      solved [101];
+std::string output;
 
 
 
@@ -344,14 +345,13 @@ void evaluate(int sequence[], int fact_array[])
         // Handle factorials
         if(fact_array[i]) {
             if(!is_integral(stack[0]))
-                return; // can't factorial non-integral             
-            if((stack[0] < 3 && stack[n] != 0) || stack[0] > 20)
+                return; // can't factorial non-integral
+            if((stack[0] < 3 && stack[0] != 0) || stack[0] > 20)
                 return; // factorial bounds
             stack[0] = (double)factorial((int)stack[0]);
             stack_info[0] = 1;
         }
-        
-     }
+    }
 
     // Check the result
     if(is_integral(stack[0]) && stack[0] > 0 && stack[0] < 101) {
@@ -395,7 +395,7 @@ const char *output_results()
     int n_solutions = 0;
 
     char buf[100];
-    std::string output;
+    output.clear();
 
     for(i = 1; i <= 100; i++) {
         sprintf(buf, "%3d: ", i);
