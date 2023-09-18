@@ -212,6 +212,11 @@ std::string print_formatted(int sequence[], int fact_array[])
 }
 
 
+bool is_valid_operation(operation o)
+{
+    // TODO: Support choosing between division B and C rules (division C supports LOG)
+    return o == ADD || o == SUB || o == MUL || o == DIV || o == POW || o == APP;
+}
 
 void permute_digits_and_evaluate()
 {
@@ -239,7 +244,10 @@ void permute_operations(int d1, int d2, int d3, int d4)
     for(o1 = ADD; o1 < NUL; o1=static_cast<operation>(o1+1)) 
     for(o2 = ADD; o2 < NUL; o2=static_cast<operation>(o2+1)) 
     for(o3 = ADD; o3 < NUL; o3=static_cast<operation>(o3+1)) {
-        permute_sequence(d1, d2, d3, d4, o1, o2, o3);
+        if (is_valid_operation(o1) && is_valid_operation(o2) && is_valid_operation(o3))
+        {
+            permute_sequence(d1, d2, d3, d4, o1, o2, o3);
+        }
     }
 }
 
@@ -257,11 +265,14 @@ void permute_sequence(int d1, int d2, int d3, int d4, operation o1, operation o2
     // this is how we check over all factorials
     // if we read the 7 number fact_array as a 7 digit binary number
     // we can loop from zero to 2^7 to cover all fact_arrays
-    for(fact_num = 0; fact_num < (1<<7); fact_num++) {
+    // TODO: Support choosing between division B and C rules (division C supports factorial)
+    //const int max_fact_num = (1<<7);
+    const int max_fact_num = 1;
+    for(fact_num = 0; fact_num < max_fact_num; fact_num++) {
         for(i = 0; i < 7; i++) {
             fact_array[i] = (fact_num >> i) & 1;
         }
-        
+
         evaluate(sequence1, fact_array);
         evaluate(sequence2, fact_array);
         evaluate(sequence3, fact_array);
